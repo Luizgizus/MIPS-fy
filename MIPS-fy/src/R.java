@@ -17,7 +17,9 @@ public class R extends Format{
 		this.setMnemoic(mnemoic);
 		this.setParams(params);
 		
-		if(this.getParamsLength() == 1) {
+		if(this.getParamsLength() == 0 && this.getMnemoic().equals("nop")) {
+			
+		} else if(this.getParamsLength() == 1) {
 			String binryRegOri1 = this.getRegisterBinaryByRegisterName(this.getParamByIndex(0).trim());
 			this.setRegOri1(binryRegOri1);
 		} else if (this.getParamsLength() == 2){
@@ -26,8 +28,24 @@ public class R extends Format{
 			
 			String binryRegOri2 = this.getRegisterBinaryByRegisterName(this.getParamByIndex(1).trim());
 			this.setRegOri2(binryRegOri2);
-		} else if(this.getParamsLength() == 3) {
+		} else if(this.getParamsLength() == 3 && !this.getMnemoic().equals("sll")) {
+			String binryRegOri1 = this.getRegisterBinaryByRegisterName(this.getParamByIndex(1).replace(',', ' ').trim());
+			this.setRegOri1(binryRegOri1);
 			
+			String binryRegOri2 = this.getRegisterBinaryByRegisterName(this.getParamByIndex(2).trim());
+			this.setRegOri2(binryRegOri2);
+			
+			String binryRegDest = this.getRegisterBinaryByRegisterName(this.getParamByIndex(0).replace(',', ' ').trim());
+			this.setRegDest(binryRegDest);
+		} else if(this.getParamsLength() == 3 && this.getMnemoic().equals("sll")) {			
+			String binryRegOri2 = this.getRegisterBinaryByRegisterName(this.getParamByIndex(1).replace(',', ' ').trim());
+			this.setRegOri2(binryRegOri2);
+			
+			String binryRegDest = this.getRegisterBinaryByRegisterName(this.getParamByIndex(0).replace(',', ' ').trim());
+			this.setRegDest(binryRegDest);
+			
+			String binaryDeslocation = this.getBinaryOf(Integer.parseInt(this.getParamByIndex(2).trim()));
+			this.setShamt(this.padLeftZeros(binaryDeslocation, 5));
 		} else {
 			System.out.println("parametros incorretos para -> " + this.getMnemoic());
 		}
@@ -40,11 +58,13 @@ public class R extends Format{
 		functCodesByInstructionName.put("sub", "100010");
 		functCodesByInstructionName.put("and", "100100");
 		functCodesByInstructionName.put("or", "100101");
+		functCodesByInstructionName.put("nor", "100111");
 		functCodesByInstructionName.put("xor", "100110");
 		functCodesByInstructionName.put("nor", "100111");
 		functCodesByInstructionName.put("slt", "101010");
 		
 		functCodesByInstructionName.put("sll", "000000");
+		functCodesByInstructionName.put("srl", "000010");
 		
 		functCodesByInstructionName.put("mult", "011000");
 		functCodesByInstructionName.put("div", "011010");
@@ -53,7 +73,7 @@ public class R extends Format{
 	}
 	
 	public String getFunctCodesByInstructionName() {
-		return this.functCodesByInstructionName.get(this.getMnemoic());
+		return this.functCodesByInstructionName.getOrDefault(this.getMnemoic(), "000000");
 	}
 
 	public String getRegOri1() {

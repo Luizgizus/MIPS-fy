@@ -4,7 +4,7 @@ public class Application {
 	private static Format f = new Format();
 	
 	public static void main(String[] args) throws Exception {
-		String[] fileLines = FileUtil.readFrom("C:\\Users\\luiz1\\eclipse-workspace\\MIPS-fy\\src\\in.txt");
+		String[] fileLines = FileUtil.readFrom("C:\\Users\\luiz1\\Desktop\\GIT\\MIPS-fy\\MIPS-fy\\src\\in.txt");
 		getMipsConvertion(fileLines);
 	}
 	
@@ -47,7 +47,7 @@ public class Application {
 			String format = f.getFormatByIntructionName(instructionName);
 			
 			String bytesString = getBytesStringByFormat(format, instructionName, params);
-			FileUtil.writeOn("C:\\Users\\luiz1\\eclipse-workspace\\MIPS-fy\\src\\out.txt", bytesString);
+			FileUtil.writeOn("C:\\Users\\luiz1\\Desktop\\GIT\\MIPS-fy\\MIPS-fy\\src\\out.txt", bytesString);
 		}
 	}
 

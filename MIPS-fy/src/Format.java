@@ -127,7 +127,7 @@ public class Format {
 		formatByInstr.put("j", "J");
 		
 		//others
-		formatByInstr.put("nop", "N");
+		formatByInstr.put("nop", "R");
 	}
 	
 	public String getFormatByIntructionName(String intructionName) {
