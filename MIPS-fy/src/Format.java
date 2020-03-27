@@ -2,8 +2,8 @@ import java.util.HashMap;
 
 /**
  * 
- * Classe com intuito simples de criar generalização para suas classes filhas e de criar conteudo geeralista e extendivel de um formato MIPS 
- * Com dois metodos que sofrerão sobrecarga nas classes filhas
+ * Classe com intuito simples de criar generalização e extensão para suas 
+ * classes filhas, sendo essas de um tipo de formato MIPS
  * 
  * @author Luiz Henrique Silva Jesus
  *
@@ -18,7 +18,7 @@ public class Format {
 	}
 	
 	/**
-	 * função criada para popular o hasmap, de registradores sendo que esse hashmap é composto do nome do registrador
+	 * Função criada para popular o hasmap, de registradores sendo que esse hashmap é composto do nome do registrador
 	 * como chave e como valor tem o binario respectivo
 	 */
 	private void setRegisters() {
@@ -81,7 +81,7 @@ public class Format {
 	
 	/**
 	 * Função criada para encapsular o atributo registers
-	 * no intuido de não ter acesso direto ao mesmo para que possa ser coletadoo o binario do registrador pelo nome do registrador
+	 * no intuido de não ter acesso direto ao mesmo para que possa ser coletado o binario do registrador pelo nome do registrador
 	 * 
 	 * @param registerName nome do registrados
 	 * @return o binario do resgistro no formato String

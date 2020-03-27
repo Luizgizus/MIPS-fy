@@ -16,7 +16,7 @@ public class FileUtil {
 	 * Metodo para leitura de dados em arquivos passiveis de acesso.
 	 * 
 	 * @param path parametro que indica o caminho de onde deve ser lido o arquivo
-	 * @return retorna um conjunto de strings sendo cada string uma linha do arquivo lido
+	 * @return retorna um conjunto de strings sendo cada posição uma linha do arquivo lido
 	 * @throws IOException para casos de tratativas de erros de abertura do arquivo por inumeros motivos
 	 */
 	public static String[] readFrom(String path) throws IOException{
@@ -36,7 +36,7 @@ public class FileUtil {
 	 * Metodo para escrita de dados em arquivos passiveis de acesso.
 	 * 
 	 * @param path parametro que indica o caminho de onde deve ser escrito os dados
-	 * @param data os dados que devem ser escrito o caminho indicado
+	 * @param data os dados que devem ser escrito no caminho indicado
 	 * @throws IOExceptions para casos de tratativas de erros de abertura do arquivo por inumeros motivos
 	 */
 	public static void writeOn(String path, String data) throws IOException{
