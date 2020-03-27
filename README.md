@@ -19,7 +19,7 @@ Dentro da pasta MIPS-fy/src estão todos os arquivos necessário para a execuç�
 <h1>Obs.:</h1>
 Professor, gostaria de ressaltar que não faço parte da turma do segundo periodo, faço parte da turma do sexto <br>
 então não conheço e nem mantenho contato com ninguem lá da turma de arquitetura e foi por esse motivo <br>
-que não consegui achar, nem consegui tentar fazer esse trabalho com alguem, peço desculpas por não cumprir essa exigencia. <br>
+que não consegui achar, nem consegui tentar fazer esse trabalho com alguem, peço desculpas por não cumprir essa exigencia. <br> <br>
 
 Do seu aluno, <br>
 Luiz Henrnique Silva Jesus - 1030701 - 579202 <br>
