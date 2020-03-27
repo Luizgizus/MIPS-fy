@@ -2,14 +2,14 @@
 Primeira parte de uma serie de pequenos sistemas que irá compor um simulador de processador mips
 
 <h1>Primeira etapa</h1>
-Nessa priemira etapa fiz um decodificador que instrução de linguagem de motagem para liguagem de maquina (binarios).
+Nessa primeira etapa fiz um decodificador que instrução de linguagem de motagem para liguagem de maquina (binarios).
 
 <h2>Execução</h2>
 Dentro da pasta MIPS-fy/src estão todos os arquivos necessário para a execução do arquivo, e para faze-lo é necessário:
 
 <ul>
-  <li>Arir o prompt de comando</li>
-  <li>Ir até o campinho MIPS-fy/src</li>
+  <li>Abrir o prompt de comando</li>
+  <li>Ir até o caminho MIPS-fy/src</li>
   <li>Executar o comando javac Mips32Decode.java</li>
   <li>Depois da compilação executar o comando java Mips32Decode [In] [Out]</li>
   <li>[In] -> Arquivo de entrada, onde terá os dados com a linguagem de montagem</li>  
