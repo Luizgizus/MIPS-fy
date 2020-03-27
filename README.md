@@ -17,10 +17,10 @@ Dentro da pasta MIPS-fy/src estão todos os arquivos necessário para a execuç�
 </ul>
 
 <h1>Obs.:</h1>
-Professor, gostaria de ressaltar que não faço parte da turma do segundo periodo, faço parte da turma do sexto
-então não conheço e nem mantenho contato com ninguem lá da turma de arquitetura e foi por esse motivo
-que não consegui achar, nem consegui tentar fazer esse trabalho com alguem, peço desculpas por não cumprir essa exigencia.
+Professor, gostaria de ressaltar que não faço parte da turma do segundo periodo, faço parte da turma do sexto <br>
+então não conheço e nem mantenho contato com ninguem lá da turma de arquitetura e foi por esse motivo <br>
+que não consegui achar, nem consegui tentar fazer esse trabalho com alguem, peço desculpas por não cumprir essa exigencia. <br>
 
-Do seu aluno,
-Luiz Henrnique Silva Jesus - 1030701 - 579202
-Engenharia de software - Noite
+Do seu aluno, <br>
+Luiz Henrnique Silva Jesus - 1030701 - 579202 <br>
+Engenharia de software - Noite <br>
