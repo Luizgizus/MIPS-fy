@@ -53,6 +53,11 @@ public class R extends Format{
 		setFunctCodesByInstructionName();
 	}
 	
+	
+	/**
+	 * função criada para popular o hasmap, de fucts por nome da instrução sendo que esse hashmap é composto do nome da instrução
+	 * como chave e como valor tem o binario da funnct da respectiva instrução
+	 */
 	private void setFunctCodesByInstructionName() {
 		functCodesByInstructionName.put("add", "100000");
 		functCodesByInstructionName.put("sub", "100010");
@@ -72,6 +77,11 @@ public class R extends Format{
 		functCodesByInstructionName.put("jr", "001000");
 	}
 	
+	/**
+	 * Função criada para encapsular o atributo functCodesByInstructionName
+	 * no intuido de não ter acesso direto ao mesmo para que possa ser coletado 
+	 * @return retorna o funct em binario da instrução isntanciada
+	 */
 	public String getFunctCodesByInstructionName() {
 		return this.functCodesByInstructionName.getOrDefault(this.getMnemoic(), "000000");
 	}
@@ -132,6 +142,10 @@ public class R extends Format{
 		this.params = params;
 	}
 
+	/**
+	 * função com intuido de coletar e juntar as partes do binario da instrução dada
+	 * @return retorno a binario da instrução instanciada
+	 */
 	public String getMipsBytes() {
 		String binaryInstruction = "";
 		

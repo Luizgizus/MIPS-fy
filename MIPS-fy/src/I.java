@@ -1,5 +1,12 @@
 import java.util.HashMap;
 
+/**
+ * 
+ * Classe que representa um formato do tipo I
+ * 
+ * @author Luiz Henrique Silva Jesus
+ *
+ */
 public class I extends Format{
 	private HashMap<String, String> opCodesByInstructionName = new HashMap<String, String>();
 	
@@ -49,6 +56,10 @@ public class I extends Format{
 		setOpCodesByInstructionName();
 	}
 	
+	/**
+	 * função criada para popular o hasmap, de opcodes por nome da instrução sendo que esse hashmap é composto do nome da instrução
+	 * como chave e como valor tem o binario respectivo
+	 */
 	private void setOpCodesByInstructionName() {
 		opCodesByInstructionName.put("lw", "100011");
 		opCodesByInstructionName.put("sw", "101011");
@@ -61,6 +72,11 @@ public class I extends Format{
 		opCodesByInstructionName.put("bne", "000101");
 	}
 	
+	/**
+	 * Função criada para encapsular o atributo opCodesByInstructionName
+	 * no intuido de não ter acesso direto ao mesmo para que possa ser coletado 
+	 * @return retorna o opcode em inario da isntrução isntanciada
+	 */
 	public String getOpCodesByInstructionName() {
 		return this.opCodesByInstructionName.get(this.getMnemoic());
 	}
@@ -109,6 +125,10 @@ public class I extends Format{
 		this.params = params;
 	}
 
+	/**
+	 * função com intuido de coletar e juntar as partes do binario da instrução dada
+	 * @return retorno a binario da instrução instanciada
+	 */
 	public String getMipsBytes() {
 		String binaryInstruction = "";
 		

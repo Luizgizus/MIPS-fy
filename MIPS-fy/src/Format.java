@@ -1,5 +1,13 @@
 import java.util.HashMap;
 
+/**
+ * 
+ * Classe com intuito simples de criar generalização para suas classes filhas e de criar conteudo geeralista e extendivel de um formato MIPS 
+ * Com dois metodos que sofrerão sobrecarga nas classes filhas
+ * 
+ * @author Luiz Henrique Silva Jesus
+ *
+ */
 public class Format {
 	private HashMap<String, String> formatByInstr = new HashMap<String, String>();
 	private HashMap<String, String> registers = new HashMap<String, String>();
@@ -9,6 +17,10 @@ public class Format {
 		setRegisters();
 	}
 	
+	/**
+	 * função criada para popular o hasmap, de registradores sendo que esse hashmap é composto do nome do registrador
+	 * como chave e como valor tem o binario respectivo
+	 */
 	private void setRegisters() {
 		//zero
 		registers.put("zero", "00000");
@@ -67,10 +79,24 @@ public class Format {
 		registers.put("ra", "11111");
 	}
 	
+	/**
+	 * Função criada para encapsular o atributo registers
+	 * no intuido de não ter acesso direto ao mesmo para que possa ser coletadoo o binario do registrador pelo nome do registrador
+	 * 
+	 * @param registerName nome do registrados
+	 * @return o binario do resgistro no formato String
+	 */
 	public String getRegisterBinaryByRegisterName(String registerName) {
 		return registers.get(registerName);
 	}
 
+	/**
+	 * 
+	 * fução criada para conversão de uma numero decimal para binario
+	 * 
+	 * @param decimal numero decimal a ser convertido
+	 * @return o binario do numero decimal
+	 */
 	public String getBinaryOf(int decimal) {		
 		StringBuffer binary = new StringBuffer();
 		while (decimal > 0) {
@@ -82,6 +108,14 @@ public class Format {
 		return binary.reverse().toString();
 	}
 	
+	/**
+	 * 
+	 * Função criada para adicionar zeros à esquerda de acordo com o tamanho da string
+	 * 
+	 * @param inputString a string que deve ter mais zeros à esqueda
+	 * @param length o tamanho final da string
+	 * @return
+	 */
 	public String padLeftZeros(String inputString, int length) {
 	    if (inputString.length() >= length) {
 	        return inputString;
@@ -95,6 +129,10 @@ public class Format {
 	    return sb.toString();
 	}
 
+	/**
+	 * função criada para popular o hasmap, de istruções polr formato sendo que esse hashmap é composto do nome da instrução
+	 * como chave e como valor tem o formato respectivo
+	 */
 	private void setInstructionByFromat() {
 		//register format
 		formatByInstr.put("add", "R");
@@ -130,6 +168,14 @@ public class Format {
 		formatByInstr.put("nop", "R");
 	}
 	
+	/**
+	 * 
+	 * Função criada para encapsular o atributo formatByInstr
+	 * no intuido de nçao ter acesso direto ao mesmo para que possa ser coletadoo formato pelo nome da instrução
+	 * 
+	 * @param intructionName nome da instrução
+	 * @return o formato da instrução como uma String
+	 */
 	public String getFormatByIntructionName(String intructionName) {
 		return formatByInstr.get(intructionName);
 	}
