@@ -17,8 +17,6 @@ public class J extends Format{
 		super();
 		this.setMnemoic(mnemoic);
 		
-		System.out.println(addr);
-		
 		this.setAddr(addr);
 		
 		setOpCodesByInstructionName();

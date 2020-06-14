@@ -12,7 +12,9 @@ public class Mips32Decode {
 	private static Format f = new Format();
 	
 	private static String fileIn;
-	private static String fileOut;
+	private static String instructionsFile = "instructions.out";
+	private static String registersFile = "registers.out.";
+	private static String memoryFile = "memory.out";
 	
 	/**
 	 * 
@@ -23,9 +25,26 @@ public class Mips32Decode {
 	 */
 	public static void main(String[] args) throws Exception {
 		fileIn = args[0];
-		fileOut = args[1];
 		String[] fileLines = FileUtil.readFrom(fileIn);
+		Memory.setMemory();
+		Register.setRegistersValues();
 		getMipsConvertion(fileLines);
+		
+		Memory.memory.forEach((k,v)->{
+			try {
+				FileUtil.writeOn(memoryFile, k + " " + v);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		Register.registersValues.forEach((k,v)->{
+			try {
+				FileUtil.writeOn(registersFile, k + " " + v);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
 	/**
@@ -87,15 +106,17 @@ public class Mips32Decode {
 	 */
 	private static void getMipsConvertion(String[] fileLines) throws Exception {
 		for (int idx = 0; idx < fileLines.length; idx++) {
-						
-			String[] lineParams = fileLines[idx].split(" ");			
-			String instructionName = lineParams[0].toLowerCase().trim();
-			String[] params = getParamsFromLines(lineParams);
-			
-			String format = f.getFormatByIntructionName(instructionName);
-			
-			String bytesString = getBytesStringByFormat(format, instructionName, params);
-			FileUtil.writeOn(fileOut, bytesString);
+			try {
+				String[] lineParams = fileLines[idx].split(" ");
+				String instructionName = lineParams[0].toLowerCase().trim();
+				String[] params = getParamsFromLines(lineParams);
+				
+				String format = f.getFormatByIntructionName(instructionName);
+				
+				String bytesString = getBytesStringByFormat(format, instructionName, params);
+				FileUtil.writeOn(instructionsFile, bytesString);
+			}
+			catch (Exception e) {}
 		}
 	}
 

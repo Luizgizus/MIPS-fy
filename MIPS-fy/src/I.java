@@ -14,6 +14,10 @@ public class I extends Format{
 	private String regDest;
 	private String imd;
 	
+	private String originalRegOri;
+	private String originalRegDest;
+	private String originalImd;
+	
 	private String mnemoic;
 	private String[] params;
 	
@@ -26,28 +30,34 @@ public class I extends Format{
 			String formattedDestinyRegistry = this.getParamsByIndex(0).replace(',', ' ').trim();
 			String regDest = this.getRegisterBinaryByRegisterName(formattedDestinyRegistry);
 			this.setRegDest(regDest);
-			
+			this.originalRegDest = formattedDestinyRegistry;
+					
 			String formattedOriginRegister = this.getParamsByIndex(1).replace(',', ' ').trim();
 			String regOri = this.getRegisterBinaryByRegisterName(formattedOriginRegister);
 			this.setRegOri(regOri);
+			this.originalRegOri = formattedOriginRegister;
 			
 			String formattedImedat = this.getParamsByIndex(2).trim();
 			String binaryImd = this.getBinaryOf(Integer.parseInt(formattedImedat));
-			this.setImd(binaryImd);		
+			this.setImd(binaryImd);
+			this.originalImd = formattedImedat;
 			
 		} else if(this.getParamsLength() == 2) {
 			String formattedDestinyRegistry = this.getParamsByIndex(0).replace(',', ' ').trim();
 			String regDest = this.getRegisterBinaryByRegisterName(formattedDestinyRegistry);
 			this.setRegDest(regDest);
+			this.originalRegDest = formattedDestinyRegistry;
 			
 			String[] explpodedMemoryPosition = this.getParamsByIndex(1).split("[(]");
 			
 			String binaryImd = this.getBinaryOf(Integer.parseInt(explpodedMemoryPosition[0]));
 			this.setImd(binaryImd);
+			this.originalImd = explpodedMemoryPosition[0];
 			
 			String formattedRelationalRegister = explpodedMemoryPosition[1].replace(')', ' ').trim();
 			String regOri = this.getRegisterBinaryByRegisterName(formattedRelationalRegister);
 			this.setRegOri(regOri);
+			this.originalRegOri = formattedRelationalRegister;
 			
 		} else {
 			System.out.println("parametros incorretos para -> " + this.getMnemoic());
@@ -124,9 +134,90 @@ public class I extends Format{
 	public void setParams(String[] params) {
 		this.params = params;
 	}
+	
+	/**
+	 * função com intuido de identificar se a intrução enviada acessa 
+	 * ou grava na memória a memória e se ela muda algum registrador
+	 * e efetivamete altera os valores dos registradores que ela usa 
+	 * assim como as operações feitas e os valores na memóra em caso 
+	 * de escrita ou leitura
+	 * 
+	 */
+	private void checkChages() {
+		if(this.getMnemoic().equals("lw")) {
+			String value = Memory.getOfMemory(this.originalImd);
+			String register = this.originalRegDest;
+			Register.setValueOnRegister(register, value);
+			
+		} else if(this.getMnemoic().equals("sw")) {
+			String value = Register.getRegistersValueByRegister(this.originalRegDest);
+			String position = this.originalImd;
+			Memory.setOnMemory(position, value);
+			
+		} else if(this.getMnemoic().equals("addi")) {
+			String registerR = Register.getRegistersValueByRegister(this.originalRegOri);
+			String imd = this.originalImd;
+			
+			String value = "" + (Integer.parseInt(imd) + Integer.parseInt(registerR));
+			
+			String registerD = this.originalRegDest;
+			Register.setValueOnRegister(registerD, value);
+			
+		} else if(this.getMnemoic().equals("andi")) {
+			String registerR = Register.getRegistersValueByRegister(this.originalRegOri);
+			String imd = this.originalImd;
+			
+			boolean valueBoolean = (Boolean.parseBoolean(imd) && Boolean.parseBoolean(registerR));
+			String value = null;
+			
+			if(valueBoolean) {
+				value = "1";
+			} else {
+				value = "0";
+			}
+			
+			String registerD = this.originalRegDest;
+			Register.setValueOnRegister(registerD, value);
+			
+		} else if(this.getMnemoic().equals("ori")) {
+			String registerR = Register.getRegistersValueByRegister(this.originalRegOri);
+			String imd = this.originalImd;
+			
+			boolean valueBoolean = (Boolean.parseBoolean(imd) || Boolean.parseBoolean(registerR));
+			String value = null;
+			
+			if(valueBoolean) {
+				value = "1";
+			} else {
+				value = "0";
+			}
+			
+			String registerD = this.originalRegDest;
+			Register.setValueOnRegister(registerD, value);
+			
+		} else if(this.getMnemoic().equals("slti")) {
+			int registerR = Integer.parseInt(Register.getRegistersValueByRegister(this.originalRegOri));
+			int imd = Integer.parseInt(this.originalImd);
+			
+			String value = null;
+			if(registerR <= imd) {
+				value = "1";
+			} else {
+				value = "0";
+			}
+			
+			String registerD = this.originalRegDest;
+			Register.setValueOnRegister(registerD, value);
+			
+		}
+	}
 
 	/**
 	 * função com intuido de coletar e juntar as partes do binario da instrução dada
+	 * Foi adicionado nessa fução a ação de chamada da função que identificar se a intrução enviada acessa 
+	 * ou grava na memória a memória e se ela muda algum registrador e para efetivamente fazer as alterações os casos
+	 * que haja mudança ela  chama uma função que altera ou busca da memória e altera
+	 * os valores dos registradores que ela usa assim como as operações feitas
 	 * @return retorno a binario da instrução instanciada
 	 */
 	public String getMipsBytes() {
@@ -136,6 +227,8 @@ public class I extends Format{
 		binaryInstruction += this.getRegOri();
 		binaryInstruction += this.getRegDest();
 		binaryInstruction += this.getImd();
+		
+		this.checkChages();
 		
 		return binaryInstruction;
 	}

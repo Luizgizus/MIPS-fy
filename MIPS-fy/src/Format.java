@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 /**
  * 
- * Classe com intuito simples de criar generalização e extensão para suas 
+ * Classe com intuito simples de criar generalização e extensão para suas
  * classes filhas, sendo essas de um tipo de formato MIPS
  * 
  * @author Luiz Henrique Silva Jesus
@@ -11,34 +11,35 @@ import java.util.HashMap;
 public class Format {
 	private HashMap<String, String> formatByInstr = new HashMap<String, String>();
 	private HashMap<String, String> registers = new HashMap<String, String>();
-	
+
 	public Format() {
 		setInstructionByFromat();
 		setRegisters();
 	}
-	
+
 	/**
-	 * Função criada para popular o hasmap, de registradores sendo que esse hashmap é composto do nome do registrador
-	 * como chave e como valor tem o binario respectivo
+	 * Função criada para popular o hasmap, de registradores sendo que esse hashmap
+	 * é composto do nome do registrador como chave e como valor tem o binario
+	 * respectivo
 	 */
 	private void setRegisters() {
-		//zero
+		// zero
 		registers.put("zero", "00000");
-		
-		//at
+
+		// at
 		registers.put("at", "00001");
-		
-		//v0-v1
+
+		// v0-v1
 		registers.put("v0", "00010");
 		registers.put("v1", "00011");
-		
-		//a0-a3
+
+		// a0-a3
 		registers.put("a0", "00100");
 		registers.put("a1", "00101");
 		registers.put("a2", "00110");
 		registers.put("a3", "00111");
-		
-		//t0-t7
+
+		// t0-t7
 		registers.put("t0", "01000");
 		registers.put("t1", "01001");
 		registers.put("t2", "01010");
@@ -47,8 +48,8 @@ public class Format {
 		registers.put("t5", "01101");
 		registers.put("t6", "01110");
 		registers.put("t7", "01111");
-		
-		//s0-s7
+
+		// s0-s7
 		registers.put("s0", "10000");
 		registers.put("s1", "10001");
 		registers.put("s2", "10010");
@@ -57,31 +58,32 @@ public class Format {
 		registers.put("s5", "10101");
 		registers.put("s6", "10110");
 		registers.put("s7", "10111");
-		
-		//t8-t9
+
+		// t8-t9
 		registers.put("t8", "11000");
 		registers.put("t9", "11001");
-		
-		//k0-k1
-		registers.put("k0", "11010");
-		registers.put("k1", "11011");
-		
-		//gp
+
+		// k1-k2
+		registers.put("k1", "11010");
+		registers.put("k2", "11011");
+
+		// gp
 		registers.put("gp", "11100");
-		
-		//sp
+
+		// sp
 		registers.put("sp", "11101");
-		
-		//fp
+
+		// fp
 		registers.put("fp", "11110");
-		
-		//ra
+
+		// ra
 		registers.put("ra", "11111");
 	}
-	
+
 	/**
-	 * Função criada para encapsular o atributo registers
-	 * no intuido de não ter acesso direto ao mesmo para que possa ser coletado o binario do registrador pelo nome do registrador
+	 * Função criada para encapsular o atributo registers no intuido de não ter
+	 * acesso direto ao mesmo para que possa ser coletado o binario do registrador
+	 * pelo nome do registrador
 	 * 
 	 * @param registerName nome do registrados
 	 * @return o binario do resgistro no formato String
@@ -97,44 +99,46 @@ public class Format {
 	 * @param decimal numero decimal a ser convertido
 	 * @return o binario do numero decimal
 	 */
-	public String getBinaryOf(int decimal) {		
+	public String getBinaryOf(int decimal) {
 		StringBuffer binary = new StringBuffer();
 		while (decimal > 0) {
 			int b = decimal % 2;
 			binary.append(b);
 			decimal = decimal >> 1;
 		}
-		
+
 		return binary.reverse().toString();
-	}
-	
-	/**
-	 * 
-	 * Função criada para adicionar zeros à esquerda de acordo com o tamanho da string
-	 * 
-	 * @param inputString a string que deve ter mais zeros à esqueda
-	 * @param length o tamanho final da string
-	 * @return
-	 */
-	public String padLeftZeros(String inputString, int length) {
-	    if (inputString.length() >= length) {
-	        return inputString;
-	    }
-	    StringBuilder sb = new StringBuilder();
-	    while (sb.length() < length - inputString.length()) {
-	        sb.append('0');
-	    }
-	    sb.append(inputString);
-	 
-	    return sb.toString();
 	}
 
 	/**
-	 * função criada para popular o hasmap, de istruções polr formato sendo que esse hashmap é composto do nome da instrução
-	 * como chave e como valor tem o formato respectivo
+	 * 
+	 * Função criada para adicionar zeros à esquerda de acordo com o tamanho da
+	 * string
+	 * 
+	 * @param inputString a string que deve ter mais zeros à esqueda
+	 * @param length      o tamanho final da string
+	 * @return
+	 */
+	public String padLeftZeros(String inputString, int length) {
+		if (inputString.length() >= length) {
+			return inputString;
+		}
+		StringBuilder sb = new StringBuilder();
+		while (sb.length() < length - inputString.length()) {
+			sb.append('0');
+		}
+		sb.append(inputString);
+
+		return sb.toString();
+	}
+
+	/**
+	 * função criada para popular o hasmap, de istruções polr formato sendo que esse
+	 * hashmap é composto do nome da instrução como chave e como valor tem o formato
+	 * respectivo
 	 */
 	private void setInstructionByFromat() {
-		//register format
+		// register format
 		formatByInstr.put("add", "R");
 		formatByInstr.put("sub", "R");
 		formatByInstr.put("mul", "R");
@@ -149,8 +153,8 @@ public class Format {
 		formatByInstr.put("sll", "R");
 		formatByInstr.put("srl", "R");
 		formatByInstr.put("jr", "R");
-		
-		//instant format
+
+		// instant format
 		formatByInstr.put("addi", "I");
 		formatByInstr.put("andi", "I");
 		formatByInstr.put("ori", "I");
@@ -159,19 +163,20 @@ public class Format {
 		formatByInstr.put("sw", "I");
 		formatByInstr.put("beq", "I");
 		formatByInstr.put("bne", "I");
-		
-		//jump format
+
+		// jump format
 		formatByInstr.put("jal", "J");
 		formatByInstr.put("j", "J");
-		
-		//others
+
+		// others
 		formatByInstr.put("nop", "R");
 	}
-	
+
 	/**
 	 * 
-	 * Função criada para encapsular o atributo formatByInstr
-	 * no intuido de nçao ter acesso direto ao mesmo para que possa ser coletadoo formato pelo nome da instrução
+	 * Função criada para encapsular o atributo formatByInstr no intuido de nçao ter
+	 * acesso direto ao mesmo para que possa ser coletadoo formato pelo nome da
+	 * instrução
 	 * 
 	 * @param intructionName nome da instrução
 	 * @return o formato da instrução como uma String
