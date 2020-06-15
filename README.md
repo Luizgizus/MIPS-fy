@@ -11,9 +11,9 @@ Dentro da pasta MIPS-fy/src estão todos os arquivos necessário para a execuç�
   <li>Abrir o prompt de comando</li>
   <li>Ir até o caminho MIPS-fy/src</li>
   <li>Executar o comando javac Mips32Decode.java</li>
-  <li>Depois da compilação executar o comando java Mips32Decode [In] [Out]</li>
+  <li>Depois da compilação executar o comando java Mips32Decode [In]</li>
   <li>[In] -> Arquivo de entrada, onde terá os dados com a linguagem de montagem</li>  
-  <li>[Out] -> Arquivo de saida, onde estará os dados com a linguagem de maquina (binarios) </li>
+  <li>Os arquivo de saida irão ser salvos automaticamente com os nomes especificados na especificação</li>
 </ul>
 
 <h1>Obs.:</h1>
